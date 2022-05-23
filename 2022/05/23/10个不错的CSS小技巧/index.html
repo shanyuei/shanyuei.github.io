@@ -1,0 +1,565 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="shanyue"><meta name="copyright" content="shanyue"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>10个不错的CSS小技巧 | 山月的小破站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.2.4/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/mini.global.js"></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/favicon.ico"><link rel="mask-icon" href="/favicon.ico" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"shanyuei.github.io","root":"/","title":"山月的小破站","version":"1.9.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","fireworks":{"colors":null},"vendors":{"darken":"https://cdn.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="CSS 大约有两百个属性。很多属性都是相互关联的，理清楚每一个属性细节是不可能的。所以，本文分享一些有用的 CSS 小技巧，方便开发者和设计师参考。 打字效果 网页设计变得越来越有创意。在 CSS 动画的协调下，你的网页会像活的一样。在这个例子中，我们将使用 animation 和 @keyframes 属性去实现打字效果。 具体来说，在这个演示中，我们通过 steps() 属性来实现分割文本的效">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10个不错的CSS小技巧">
+<meta property="og:url" content="https://shanyuei.github.io/2022/05/23/10%E4%B8%AA%E4%B8%8D%E9%94%99%E7%9A%84CSS%E5%B0%8F%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="山月的小破站">
+<meta property="og:description" content="CSS 大约有两百个属性。很多属性都是相互关联的，理清楚每一个属性细节是不可能的。所以，本文分享一些有用的 CSS 小技巧，方便开发者和设计师参考。 打字效果 网页设计变得越来越有创意。在 CSS 动画的协调下，你的网页会像活的一样。在这个例子中，我们将使用 animation 和 @keyframes 属性去实现打字效果。 具体来说，在这个演示中，我们通过 steps() 属性来实现分割文本的效">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Typing-effect-for-text.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Shadow-for-transparent-images-1024x373.png">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Set-a-custom-cursor-with-CSS.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/CSS-tooltip-using-attr-property.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Item-Checklist-with-CSS.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/CSS-is-and-where-properties.png">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Accordion-dropdown-using-keyframes.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Hover-effect-sidebar.gif">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/letter-dropcap-using-css.png">
+<meta property="og:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Add-an-icon-before-buttons-using-CSS.png">
+<meta property="article:published_time" content="2022-05-23T05:36:38.000Z">
+<meta property="article:modified_time" content="2022-05-23T06:05:13.896Z">
+<meta property="article:author" content="shanyue">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Typing-effect-for-text.gif"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="shanyue"><img width="96" loading="lazy" src="/avatar.jpg" alt="shanyue"></a><div class="site-author-name"><a href="/about/">shanyue</a></div><span class="site-name">山月的小破站</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">2</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">1</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">2</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%93%E5%AD%97%E6%95%88%E6%9E%9C"><span class="toc-number">1.</span> <span class="toc-text">打字效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%8F%E6%98%8E%E5%9B%BE%E7%89%87%E9%98%B4%E5%BD%B1%E6%95%88%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">透明图片阴影效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-Cursor"><span class="toc-number">3.</span> <span class="toc-text">自定义 Cursor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-attr-%E5%B1%95%E7%A4%BA-tooltip"><span class="toc-number">4.</span> <span class="toc-text">使用 attr() 展示 tooltip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%AF-CSS-%E5%AE%9E%E7%8E%B0%E6%A0%B8%E7%AE%97%E6%B8%85%E5%8D%95"><span class="toc-number">5.</span> <span class="toc-text">纯 CSS 实现核算清单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-is-%E5%92%8C-where-%E6%B7%BB%E5%8A%A0%E5%85%83%E7%B4%A0%E6%A0%B7%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">使用 :is() 和 :where() 添加元素样式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%85%B3%E9%94%AE%E5%B8%A7%E5%AE%9E%E7%8E%B0%E6%89%8B%E9%A3%8E%E7%90%B4%E4%B8%8B%E6%8B%89%E6%95%88%E6%9E%9C"><span class="toc-number">7.</span> <span class="toc-text">使用关键帧实现手风琴下拉效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E7%9A%84-Hover-%E6%95%88%E6%9E%9C"><span class="toc-number">8.</span> <span class="toc-text">侧边栏的 Hover 效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-first-letter-%E5%AE%9E%E7%8E%B0%E9%A6%96%E5%AD%97%E6%AF%8D%E5%A4%A7%E5%86%99"><span class="toc-number">9.</span> <span class="toc-text">使用 first-letter 实现首字母大写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-before-%E6%B7%BB%E5%8A%A0%E6%8C%89%E9%92%AE%E7%9A%84%E5%9B%BE%E6%A0%87"><span class="toc-number">10.</span> <span class="toc-text">使用 ::before 添加按钮的图标</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="https://shanyuei.github.io/2022/05/23/10%E4%B8%AA%E4%B8%8D%E9%94%99%E7%9A%84CSS%E5%B0%8F%E6%8A%80%E5%B7%A7/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="shanyue"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="山月的小破站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">10个不错的CSS小技巧</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2022-05-23 13:36:38" itemprop="dateCreated datePublished" datetime="2022-05-23T13:36:38+08:00">2022-05-23</time></div><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/%E5%B0%8F%E8%AE%A1/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">小计</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/CSS/" style="--text-color:#5298d1"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">CSS</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p><code>CSS</code> 大约有两百个属性。很多属性都是相互关联的，理清楚每一个属性细节是不可能的。所以，本文分享一些有用的 <code>CSS</code> 小技巧，方便开发者和设计师参考。</p>
+<h3 id="打字效果"><a href="#打字效果" class="headerlink" title="打字效果"></a>打字效果</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Typing-effect-for-text.gif" alt="Typing-effect-for-text.gif" loading="lazy"></p>
+<p>网页设计变得越来越有创意。在 <code>CSS</code> 动画的协调下，你的网页会像活的一样。在这个例子中，我们将使用 <code>animation</code> 和 <code>@keyframes</code> 属性去实现打字效果。</p>
+<p>具体来说，在这个演示中，我们通过 <code>steps()</code> 属性来实现分割文本的效果。首先，你必须指定 <code>step()</code> 中传入的数量，在这个例子中就是文本的长度。</p>
+<p>接着，第二步，我们使用 <code>@keyframes</code> 去声明什么时候开始执行动画。</p>
+<blockquote>
+<p>如果你在文本 <code>Typing effect for text</code> 后面添加内容，而不改变 <code>step()</code> 中的数字，将不会产生这种效果。</p>
+</blockquote>
+<p>这种效果并不是特别新鲜。然而，很多开发者却使用 <code>JavaScript</code> 库去实现，而不是使用 <code>CSS</code>。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;typing&quot;&gt;
+    &lt;div class&#x3D;&quot;typing-effect&quot;&gt;
+Typing effect for text
+    &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.typing &#123;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+&#125;
+
+.typing-effect &#123;
+  width: 22ch;
+  animation: typing 2s steps(22), effect .5s step-end infinite alternate;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+  font-family: monospace;
+  font-size: 2em;
+&#125;
+
+@keyframes typing &#123;
+  from &#123;
+    width: 0
+  &#125;
+&#125;
+    
+@keyframes effect &#123;
+  50% &#123;
+    border-color: transparent
+  &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="透明图片阴影效果"><a href="#透明图片阴影效果" class="headerlink" title="透明图片阴影效果"></a>透明图片阴影效果</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Shadow-for-transparent-images-1024x373.png" alt="Shadow-for-transparent-images.png" loading="lazy"></p>
+<p>你是否使用过 <code>box-shadow</code> 为透明的图片添加阴影，却让其看起来像添加了一个边框一样？然而解决方案是使用 <code>drop-shadow</code>。</p>
+<p><code>drop-shadow</code> 的工作方式是，其遵循给给定图片的 <code>Alpha</code> 通道。因此阴影是基于图片的内部形状，而不是显示在图片外面。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;transparent-shadow&quot;&gt;
+  &lt;div class&#x3D;&quot;margin-right&quot;&gt;
+    &lt;div class&#x3D;&quot;margin-bottom align-center&quot;&gt;
+      box-shadow
+    &lt;&#x2F;div&gt;
+    
+    &lt;img class&#x3D;&quot;box-shadow&quot; src&#x3D;&quot;https:&#x2F;&#x2F;c6c8j7x5.rocketcdn.me&#x2F;wp-content&#x2F;uploads&#x2F;2022&#x2F;02&#x2F;logo.png&quot; alt&#x3D;&quot;box-shadow example (transparent)&quot;&gt;
+  &lt;&#x2F;div&gt;
+    
+  &lt;div&gt;
+    &lt;div class&#x3D;&quot;margin-bottom align-center&quot;&gt;
+      drop-shadow
+    &lt;&#x2F;div&gt;
+    
+    &lt;img class&#x3D;&quot;drop-shadow&quot; src&#x3D;&quot;https:&#x2F;&#x2F;c6c8j7x5.rocketcdn.me&#x2F;wp-content&#x2F;uploads&#x2F;2022&#x2F;02&#x2F;logo.png&quot; alt&#x3D;&quot;drop-shadow example (transparent)&quot;&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.transparent-shadow &#123;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+&#125;
+
+.margin-right &#123;
+  margin-right: 2em;
+&#125;
+
+.margin-bottom &#123;
+  margin-bottom: 1em;
+&#125;
+
+.align-center &#123;
+  text-align: center;
+&#125;
+
+.box-shadow &#123;
+  box-shadow: 2px 4px 8px #3723a1;
+&#125;
+
+.drop-shadow &#123;
+  filter: drop-shadow(2px 4px 8px #3723a1);
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="自定义-Cursor"><a href="#自定义-Cursor" class="headerlink" title="自定义 Cursor"></a>自定义 Cursor</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Set-a-custom-cursor-with-CSS.gif" alt="Set-a-custom-cursor-with-CSS.gif" loading="lazy"></p>
+<p>你不需要强迫你站点访问者使用独特的光标。至少，不是出于用户体验的目的。不过，关于 <code>cursor</code> 属性要说明的是，它可以让你展示图片，这相当于以照片的格式显示提示信息。</p>
+<p>一些用户案例，包括比较两个不同的照片，你无需在视图窗口渲染这些照片。比如：<code>cursor</code> 属性可以用在你的设计中，节省空间。因为你可以在特定的 <code>div</code> 元素中锁定特定的光标，所以在此 <code>div</code> 这外可以无效。</p>
+<blockquote>
+<p>目前尝试对图片的大小有限制，读者可以自行更改验证</p>
+</blockquote>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;custom-cursor&quot;&gt;
+  &lt;div class&#x3D;&quot;card&quot;&gt;
+    Default
+  &lt;&#x2F;div&gt;
+  
+  &lt;div class&#x3D;&quot;card card-image-cursor&quot;&gt;
+    Image
+  &lt;&#x2F;div&gt;
+  
+  &lt;div class&#x3D;&quot;card card-emoji-cursor&quot;&gt;
+    Emoji
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.custom-cursor &#123;
+  display: flex;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+  background: #f3f3f3;
+  padding: 0 10px;
+&#125;
+
+.card &#123;
+    width: 200px;
+    height: 200px;display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D29A5A;
+    margin-right: 10px;color: #fff;
+    font-size: 1.4em;
+    text-align: center;
+  &#125;
+
+.card-image-cursor &#123;
+  background-color: #D11A5A;
+  cursor: url(https:&#x2F;&#x2F;stackdiary.com&#x2F;tools&#x2F;assets&#x2F;img&#x2F;tools&#x2F;html-beautifier.svg), auto;
+&#125;
+
+.card-emoji-cursor &#123;
+  background-color: #D29B22;
+  cursor: url(&quot;data:image&#x2F;svg+xml;utf8,&lt;svg xmlns&#x3D;&#39;http:&#x2F;&#x2F;www.w3.org&#x2F;2000&#x2F;svg&#39;  width&#x3D;&#39;48&#39; height&#x3D;&#39;48&#39; viewport&#x3D;&#39;0 0 100 100&#39; style&#x3D;&#39;fill:black;font-size:24px;&#39;&gt;&lt;text y&#x3D;&#39;50%&#39;&gt;🚀&lt;&#x2F;text&gt;&lt;&#x2F;svg&gt;&quot;), auto;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="使用-attr-展示-tooltip"><a href="#使用-attr-展示-tooltip" class="headerlink" title="使用 attr() 展示 tooltip"></a>使用 attr() 展示 tooltip</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/CSS-tooltip-using-attr-property.gif" alt="CSS-tooltip-using-attr-property.gif" loading="lazy"></p>
+<p><code>attr()</code> 属性是我最近发现的，且是最得意的发现。我本打算为我的站点添加 <code>tooltip</code> 的功能，但是发现需要引入一个插件，这就引入了不必要的东西，让我的站点看起来臃肿。感谢的是，可以使用 <code>attr()</code> 来避免这种情况。</p>
+<p><code>attr()</code> 属性工作的方式很简单，我逐步解析一下：</p>
+<ul>
+<li>我们使用 <code>tooltip class</code> 去标志哪个元素需要展示 <code>tooltip</code> 信息。然后为该元素添加你喜欢的样式，这个方便演示，我们使用了 <code>dotted border-bottom</code> 的样式。</li>
+<li>接下来，我们创建一个 <code>:before</code> 伪元素，它将包含内容 <code>content</code>，指向特定的 <code>attr()</code>。这里指 <code>attr(tooltip-data)</code>。</li>
+<li>接着，我们会创建一个 <code>:hover</code> 伪类，当用户鼠标移动道元素上时，它将设置 <code>opacity</code> 为 <code>1</code>。</li>
+</ul>
+<p>此外，你可以包含自定义的样式。这取决于你设定的 <code>tooltp</code> 的数据，你也许需要调整其宽度或者边距。一旦你设定了 <code>tooptip-data arrt()</code> 类，你可以在你设计的其他部分应用。 </p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;h1&gt;
+  HTML&#x2F;CSS tooltip
+&lt;&#x2F;h1&gt;
+&lt;p&gt;
+  Hover &lt;span class&#x3D;&quot;tooltip&quot; tooltip-data&#x3D;&quot;Tooltip Content&quot;&gt;Here&lt;&#x2F;span&gt; to see the tooltip.
+&lt;&#x2F;p&gt;
+&lt;p&gt;
+  You can also hover &lt;span class&#x3D;&quot;tooltip&quot; tooltip-data&#x3D;&quot;This is another Tooltip Content&quot;&gt;here&lt;&#x2F;span&gt; to see another example.
+&lt;&#x2F;p&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.tooltip &#123;
+  position: relative;
+  border-bottom: 1px dotted black;
+&#125;
+
+.tooltip:before &#123;
+  content: attr(tooltip-data); 
+  position: absolute;
+  width: 250px;
+  background-color: #efba93;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  line-height: 1.1;
+  border-radius: 5px;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .5s;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 0.70em;
+  visibility: hidden;
+&#125;
+
+.tooltip:after &#123;
+  content: &quot;&quot;;
+  position: absolute;
+  bottom: 75%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  opacity: 0;
+  transition: opacity .5s;
+  border-color: #000 transparent transparent transparent;
+  visibility: hidden;
+&#125;
+
+.tooltip:hover:before, 
+.tooltip:hover:after &#123;
+  opacity: 1;
+  visibility: visible;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="纯-CSS-实现核算清单"><a href="#纯-CSS-实现核算清单" class="headerlink" title="纯 CSS 实现核算清单"></a>纯 CSS 实现核算清单</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Item-Checklist-with-CSS.gif" alt="Item-Checklist-with-CSS.gif" loading="lazy"></p>
+<p>正如我开头所说的，<code>CSS</code> 正逐步成熟。这个动态清单的演示就是一个很好的例子。</p>
+<p>我们使用 <code>checkbox</code> 输入类型，加上一个 <code>:checked</code> 伪类。当 <code>:checked</code> 返回 <code>true</code> 的情况时，我们使用 <code>transform</code> 属性更改状态。</p>
+<p>你可以使用这种方法实现各种目标。比如，当用户点点击指定的复选框时候，切花到隐藏其内容。在输入 <code>input</code> 类型的单选和复选框使用，当然，这也可以应用到 <code>&lt;option&gt;</code> 和 <code>&lt;select&gt;</code> 元素。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;checklist&quot;&gt;
+  &lt;h2&gt;Item Checklist with CSS&lt;&#x2F;h2&gt;
+  &lt;label&gt;
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; &#x2F;&gt;
+    &lt;i&gt;&lt;&#x2F;i&gt;
+    &lt;span&gt;Item #1&lt;&#x2F;span&gt;
+  &lt;&#x2F;label&gt;
+  &lt;label&gt;
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; &#x2F;&gt;
+    &lt;i&gt;&lt;&#x2F;i&gt;
+    &lt;span&gt;Item #2&lt;&#x2F;span&gt;
+  &lt;&#x2F;label&gt;
+  &lt;label&gt;
+    &lt;input type&#x3D;&quot;checkbox&quot; name&#x3D;&quot;&quot; id&#x3D;&quot;&quot; &#x2F;&gt;
+    &lt;i&gt;&lt;&#x2F;i&gt;
+    &lt;span&gt;Item #3&lt;&#x2F;span&gt;
+  &lt;&#x2F;label&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.checklist &#123;
+    padding: 50px;
+    position: relative;
+    background: #043b3e;
+    border-top: 50px solid #03a2f4;
+&#125;
+.checklist h2 &#123;
+    color: #f3f3f3;
+    font-size: 25px;
+    padding: 10px 0;
+    margin-left: 10px;
+    display: inline-block;
+    border-bottom: 4px solid #f3f3f3;
+&#125;
+.checklist label &#123;
+    position: relative;
+    display: block;
+    margin: 40px 0;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+&#125;
+.checklist input[type&#x3D;&quot;checkbox&quot;] &#123;
+    -webkit-appearance: none;
+&#125;
+.checklist i &#123;
+    position: absolute;
+    top: 2px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #fff;
+&#125;
+.checklist input[type&#x3D;&quot;checkbox&quot;]:checked ~ i &#123;
+    top: 1px;
+    height: 15px;
+    width: 25px;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+&#125;
+.checklist span &#123;
+    position: relative;
+    left: 40px;
+    transition: 0.5s;
+&#125;
+.checklist span:before &#123;
+    content: &#39;&#39;;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #fff;
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+&#125;
+.checklist input[type&#x3D;&quot;checkbox&quot;]:checked ~ span:before &#123;
+    transform: translateY(-50%) scaleX(1);
+    transform-origin: right;
+    transition: transform 0.5s;
+&#125;
+.checklist input[type&#x3D;&quot;checkbox&quot;]:checked ~ span &#123;
+    color: #154e6b;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="使用-is-和-where-添加元素样式"><a href="#使用-is-和-where-添加元素样式" class="headerlink" title="使用 :is() 和 :where() 添加元素样式"></a>使用 <code>:is()</code> 和 <code>:where()</code> 添加元素样式</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/CSS-is-and-where-properties.png" alt="CSS-is-and-where-properties.png" loading="lazy"></p>
+<p>现代 <code>CSS</code> 框架运行的一种方式是通过使用<strong>条件逻辑选择器</strong>。换言之，<code>:is()</code> 和 <code>:where()</code> 属性可以用于同时设置多种设计元素的样式。但是，更重要的是，你可以使用这些属性去查询你需单独处理的元素。</p>
+<p>下面的 <code>CSS</code> 片段是一个小案例，你可以通过 <code>MDN</code> 学习更多关于 <code>:is()</code> 和 <code>:where()</code> 的内容。</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;* this query will select the b element within a heading and change its color. *&#x2F;
+
+:where(h2,h3,h4) &gt; b &#123;
+  color: yellow;
+&#125;
+
+&#x2F;* here we query the paragraph element for a footer that is nested inside an article. this lets us select specific parts of the design and style them accordingly. *&#x2F;
+
+article :is(footer) &gt; p &#123;
+  color: black;
+&#125;
+
+&#x2F;* want to create various styles simultaneously? the :where property can be used to select specific elements within a dynamic theme style. you can further nest the elements by specify (button,a) for example. *&#x2F;
+
+.dark-button-style :where(button) &#123;
+  background-color: red;
+&#125;
+
+&#x2F;* the above query works for selecting multiple styles at once, too *&#x2F;
+
+:is(.dark-button-style, .red-button-style) :where(button) &#123;
+  color: red;
+&#125;
+
+&#x2F;* here we select the h2 element which is located inside a specific div element *&#x2F;
+
+:is(h2):where(.content-title) &#123;
+  text-transform: uppercase;
+&#125;
+
+&#x2F;* we can further improve the query by applying the changes to a specific subset *&#x2F;
+
+.title-area:is(h2:is(.content-title)) &#123;
+  font-weight: 900;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+<h3 id="使用关键帧实现手风琴下拉效果"><a href="#使用关键帧实现手风琴下拉效果" class="headerlink" title="使用关键帧实现手风琴下拉效果"></a>使用关键帧实现手风琴下拉效果</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Accordion-dropdown-using-keyframes.gif" alt="Accordion-dropdown-using-keyframes.gif" loading="lazy"></p>
+<p><code>JavaScript</code> 库，比如 <code>jQuery, Cash</code> 等，即使你想使用一个简单的缩放功能，你都要整个引入。幸运的是，很多 <code>CSS</code> 技巧能够避免这种引入。比如下面的手风琴片段代码。</p>
+<p>如果你认真看下当下 <code>web</code> 设计的趋势，你会发现在登陆页面就会发现手风琴这种设计效果。这是一种简缩内容的方式，以节省设计空间。常见问题解答，产品功能，使用提示等功能，都可以放在手风琴内实现。下面是纯 <code>CSS</code> 代码片段对其的实践。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;main&gt;
+  &lt;details open&gt;
+    &lt;summary&gt;Accordion Tab #1&lt;&#x2F;summary&gt;
+    &lt;div class&#x3D;&quot;tab-content&quot;&gt;
+      &lt;p&gt;your text goes here&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;details&gt;
+
+    &lt;details&gt;
+    &lt;summary&gt;Accordion Tab #2&lt;&#x2F;summary&gt;
+    &lt;div class&#x3D;&quot;tab-content&quot;&gt;
+      &lt;p&gt;your text goes here&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;details&gt;
+      &lt;details&gt;
+    &lt;summary&gt;Accordion Tab #3&lt;&#x2F;summary&gt;
+    &lt;div class&#x3D;&quot;tab-content&quot;&gt;
+      &lt;p&gt;your text goes here&lt;&#x2F;p&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;details&gt;
+   &lt;&#x2F;main&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;* .tab-content can be styled as you like *&#x2F;
+main &#123;
+  max-width: 400px;
+  margin: 0 auto;
+&#125;
+p &#123;
+    text-align: justify;
+    font-family: monospace;
+    font-size: 13px;
+&#125;
+summary &#123;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #f3f3f3;
+  color: #000;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  position: relative;
+&#125;
+details[open] summary ~ * &#123;
+  animation: sweep .5s ease-in-out;
+&#125;
+@keyframes sweep &#123;
+  0%    &#123;opacity: 0; margin-top: -10px&#125;
+  100%  &#123;opacity: 1; margin-top: 0px&#125;
+&#125;
+details &gt; summary::after &#123;
+  position: absolute;
+  content: &quot;+&quot;;
+  right: 20px;
+&#125;
+details[open] &gt; summary::after &#123;
+  position: absolute;
+  content: &quot;-&quot;;
+  right: 20px;
+&#125;
+details &gt; summary::-webkit-details-marker &#123;
+  display: none;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="侧边栏的-Hover-效果"><a href="#侧边栏的-Hover-效果" class="headerlink" title="侧边栏的 Hover 效果"></a>侧边栏的 Hover 效果</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Hover-effect-sidebar.gif" alt="Hover-effect-sidebar.gif" loading="lazy"></p>
+<p>有没有可以使用 <code>CSS</code> 就可以实现一个动态 <code>Hover</code> 效果的侧边栏呢？当然，这得多亏 <code>transform</code> 和 <code>:hover</code> 属性。</p>
+<p>为了兼容性，我在多种移动端中进行测试，感觉还不错。虽然这种效果在桌面中使用比在移动端中使用顺畅。</p>
+<p>在这个练习案例中，使用 <code>position: sticky;</code> 创建一个吸附的侧边栏，其工作的效果良好。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;css-dynamic-sidebar&quot;&gt;
+
+  &lt;nav&gt;
+    &lt;a class&#x3D;&quot;&quot; href&#x3D;&quot;#&quot;&gt;Menu #1&lt;&#x2F;a&gt;
+    &lt;a class&#x3D;&quot;&quot; href&#x3D;&quot;#&quot;&gt;Menu #2&lt;&#x2F;a&gt;
+    &lt;a class&#x3D;&quot;&quot; href&#x3D;&quot;#&quot;&gt;Menu #3&lt;&#x2F;a&gt;
+  &lt;&#x2F;nav&gt;
+ 
+&lt;div class&#x3D;&quot;site-content&quot;&gt;
+  &lt;p&gt;Hover over the sidebar&lt;&#x2F;p&gt;
+  &lt;p&gt;Also work with Tab selector (for accessibility)&lt;&#x2F;p&gt;
+&lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">.css-dynamic-sidebar &#123;
+    overflow: hidden;
+    position: relative;
+    height: 15em;
+    max-width: 15em;
+    margin: auto;
+&#125;
+
+.site-content &#123;
+    margin: auto;
+&#125;
+ 
+nav &#123;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 100%;
+    padding: 1em;
+    background-color: #f3f3f3;
+    transform: translateX(1em);
+    transition: 0.2s transform;
+&#125;
+ 
+nav:hover,
+nav:focus-within &#123;
+    transform: translateX(100%);
+&#125;
+ 
+a &#123;
+    white-space: pre;
+    color: black;
+&#125;
+ 
+p &#123;
+    font-size: 2em;
+    font-family: monospace;
+    text-align: center;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="使用-first-letter-实现首字母大写"><a href="#使用-first-letter-实现首字母大写" class="headerlink" title="使用 first-letter 实现首字母大写"></a>使用 first-letter 实现首字母大写</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/letter-dropcap-using-css.png" alt="letter-dropcap-using-css.png" loading="lazy"></p>
+<p>在 <code>CSS</code> 中，可以选择确定的 <code>first-of-type</code> 元素。在这个例子中，我们使用 <code>::first-letter</code> 伪类去实现首字母大写的效果。这个类可以让我们更自由的添加样式。所以，你可以调整大写字母的样式以符合你的站点设计风格。</p>
+<p>说到这个属性，你可以使用它干很多事。当特定元素在页面中第一次出现，我们可以使用 <code>first-of-type</code> 单独进行添加样式。但是，正如下面代码展示，尽管元素已经出现过，你依然可以使用在多个元素上。</p>
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;* here we target the .content-section wrapper and select the p element. then append first-of-type and target first-letter specifically. you can then reuse the same option in other parts of your design by changing the wrapper variable *&#x2F;
+
+.content-section p:first-of-type::first-letter &#123;
+    color: #f3f3f3;
+    float:  left;
+    font-size: 4rem;
+    line-height: 4vw;
+    padding-right: 8px;
+ &#x2F;* border: 0.25em double; *&#x2F;
+&#125;
+
+&#x2F;* you can also add custom properties like border to create a creative dropcap effect, ideal for book presentations, etc,. *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h3 id="使用-before-添加按钮的图标"><a href="#使用-before-添加按钮的图标" class="headerlink" title="使用 ::before 添加按钮的图标"></a>使用 ::before 添加按钮的图标</h3><p><img src="https://c6c8j7x5.rocketcdn.me/wp-content/uploads/2022/03/Add-an-icon-before-buttons-using-CSS.png" alt="Add-an-icon-before-buttons-using-CSS.png" loading="lazy"></p>
+<p>每当我需要链接到外部其他资源的时候，我都会使用自定义的按钮来实现。准确来说，是一个添加图标的按钮。简单的谷歌搜索，你会发现很多 <code>button generators</code> ，但是我对可以随时使用的通用解决方案更感兴趣。</p>
+<p>所以，为了实现这个目标，我为特定按钮创建了一个 <code>:before</code> 伪元素。需要声明的是，代码片段中的 <code>content:&quot;\0000a0&quot;;</code> 是 <code>&amp;nbsp;</code> 的 <code>Unicode</code> 转义。</p>
+<p>你可以通过宽高属性来调整图标的尺寸，以更好适应按钮样式。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;div class&#x3D;&quot;card&quot;&gt;
+  &lt;div class&#x3D;&quot;card-body&quot;&gt;
+    &lt;a href&#x3D;&quot;&quot; target&#x3D;&quot;_blank&quot; class&#x3D;&quot;wp-block-button btn btn-web btn-primary&quot; rel&#x3D;&quot;noopener&quot;&gt;Website&lt;&#x2F;a&gt;
+    &lt;a href&#x3D;&quot;&quot; target&#x3D;&quot;_blank&quot; class&#x3D;&quot;wp-block-button btn btn-docu btn-primary&quot; rel&#x3D;&quot;noopener&quot;&gt;Documentation&lt;&#x2F;a&gt;
+    &lt;a href&#x3D;&quot;&quot; target&#x3D;&quot;_blank&quot; class&#x3D;&quot;wp-block-button btn btn-gh btn-primary&quot; rel&#x3D;&quot;noopener&quot;&gt;GitHub&lt;&#x2F;a&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">&#x2F;* select the global button design and then query the specific button class for which you wish to use the custom icon or image *&#x2F;
+
+.btn-primary .btn-docu:before &#123;
+  content:&quot;\0000a0&quot;;
+  display:inline-flex;
+  height:24px;
+  width:24px;
+  line-height:24px;
+  margin:0px 10px 0px 0px;
+  position:relative;
+  top:0px;
+  left:0px;
+  background:url(https:&#x2F;&#x2F;stackdiary.com&#x2F;docu.svg) no-repeat left center transparent;
+  background-size:100% 100%;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>最重要的一点，这些 <code>CSS</code> 技巧凸显了不使用 <code>JavaScript</code> 来实现功能的潜力。你可以使用上面这些小技巧，应用在你的设计上。事实上，很多这样的例子可以混合使用，以创作自由风格的设计。</p>
+<p>原文：<a target="_blank" rel="noopener" href="https://stackdiary.com/useful-css-tricks/">10 Useful CSS Tricks for Front-end Developers</a></p>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/02/11/%E6%B7%B1%E5%85%A5JavaScript%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/" rel="next" title="深入JavaScript变量对象"><span class="post-nav-text">深入JavaScript变量对象</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> shanyue</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.9.0</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></div></body></html>
