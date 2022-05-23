@@ -16,7 +16,7 @@ document.addEventListener("pjax:success", initScrollReveal);
 <meta property="og:description" content="ES12 中 8 个很棒的新 JavaScript 语言特性JavaScript 语言规范，也被称为 ECMAScript 或 ES，每年都会根据需求进行修改，这不，ECMAScript 2022就来了。 虽然 JavaScript 最初是一种脚本语言，但 ECMAScript 规范指出，该语言“现在被用于多种环境和较大规模的编程应用场景。”因此，JavaScript 现在应该被理解为一种功能齐全">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-23T08:16:43.000Z">
-<meta property="article:modified_time" content="2022-05-23T08:20:47.890Z">
+<meta property="article:modified_time" content="2022-05-23T08:23:44.237Z">
 <meta property="article:author" content="shanyue">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary"><script>(function() {
@@ -32,7 +32,7 @@ document.addEventListener("pjax:success", initScrollReveal);
 <pre class="line-numbers language-none"><code class="language-none"> let quote &#x3D; &quot;all the world&#39;s a stage, and all the men and women merely players&quot;;
  let newQuote &#x3D; quote.replaceAll(&quot;all&quot;, &quot;most of&quot;);
  console.log(newQuote);
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="promise-any"><a href="#promise-any" class="headerlink" title="promise.any()"></a>promise.any()</h2><p><code>promise.any()</code>方法接受一组promise，并允许您通过返回新的promise来响应第一个成功完成的promise。</p>
 <p>如果任何一个 Promise 出错，<code>promise.any()</code>仍然会根据集合中的第一个已解决的 Promise 进行操作。</p>
@@ -50,7 +50,7 @@ document.addEventListener("pjax:success", initScrollReveal);
  Promise.any(promises).then((firstResolved) &#x3D;&gt; &#123;
    console.log(firstResolved); &#x2F;&#x2F; outputs “1 second”
  &#125;)
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="promise-any-——全部被拒绝"><a href="#promise-any-——全部被拒绝" class="headerlink" title="promise.any()——全部被拒绝"></a>promise.any()——全部被拒绝</h4><pre class="line-numbers language-none"><code class="language-none"> const promise1 &#x3D; new Promise((resolve, reject) &#x3D;&gt; &#123;
    setTimeout(reject, 1000, &quot;1 second&quot;);
@@ -65,7 +65,7 @@ document.addEventListener("pjax:success", initScrollReveal);
  Promise.any(promises).then((firstResolved) &#x3D;&gt; &#123;
    console.log(firstResolved);
  &#125;).catch((err) &#x3D;&gt; &#123; console.log(&quot;error: &quot; + err) &#125;) &#x2F;&#x2F; outputs error: AggregateError: All promises were rejected
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="AggregateError"><a href="#AggregateError" class="headerlink" title="AggregateError"></a>AggregateError</h2><p><code>AggregateError</code>是一种特殊的错误子类，它将许多错误组合成一个汇总对象。</p>
 <p>在上面promise.any()——全部被拒绝的例子中返回了一个<code>AggregateError</code>。该错误包含描述错误的消息和包含有关每个错误的详细信息的数组。</p>
@@ -76,7 +76,7 @@ document.addEventListener("pjax:success", initScrollReveal);
        length: 2
    message: &quot;All promises were rejected&quot;
    stack: &quot;AggregateError: All promises were rejected&quot;
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="New-logical-assignment-operators"><a href="#New-logical-assignment-operators" class="headerlink" title="New logical assignment operators"></a>New logical assignment operators</h2><p>ECMAScript 2021 推出新的逻辑运算符<code>||</code>、<code>??</code>和<code>&amp;&amp;</code>。</p>
 <h3 id="Nullish-assignment-x3D"><a href="#Nullish-assignment-x3D" class="headerlink" title="Nullish assignment (??&#x3D;)"></a>Nullish assignment (??&#x3D;)</h3><p>我们可以使用 <code>??=</code> 来测试变量是否为 null 或未定义。如果变量为 null 或未定义，您可以将表达式的右侧分配给变量。</p>
@@ -87,7 +87,7 @@ document.addEventListener("pjax:success", initScrollReveal);
  nonExistingQuote ??&#x3D; quote;
  console.log(existingQuote); &#x2F;&#x2F; A leader is best when people barely know he exists
  console.log(nonExistingQuote); &#x2F;&#x2F; When goodness is lost there is morality.
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当作用于存在的变量时，例如<code>existingQuote</code>，空赋值运算符什么也不做。但是，当作用在<code>nonExistingQuote</code>上时，它会分配一个新值。</p>
 <h3 id="And-assignment-amp-amp-x3D"><a href="#And-assignment-amp-amp-x3D" class="headerlink" title="And assignment (&amp;&amp;&#x3D;)"></a>And assignment (&amp;&amp;&#x3D;)</h3><p>和赋值运算符 ( <code>&amp;&amp;=</code>）用于表达式的左侧。如果左侧不为null或未定义，则分配表达式的右侧。如果它是假的，则什么也不做。</p>
@@ -98,7 +98,7 @@ document.addEventListener("pjax:success", initScrollReveal);
  let nonEmptyString &#x3D; &quot;foo&quot;;
  nonEmptyString &amp;&amp;&#x3D; &quot;bar&quot;;
  console.log(nonEmptyString); &#x2F;&#x2F; “bar”
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="Or-assignment-x3D"><a href="#Or-assignment-x3D" class="headerlink" title="Or assignment (||&#x3D;)"></a>Or assignment (||&#x3D;)</h3><p>_or_赋值运算符与您刚刚看到的 and 赋值运算符作用_相反_。</p>
 <pre class="line-numbers language-none"><code class="language-none"> let emptyString &#x3D; &quot;&quot;;
@@ -108,14 +108,14 @@ document.addEventListener("pjax:success", initScrollReveal);
  let nonEmptyString &#x3D; &quot;foo&quot;;
  nonEmptyString ||&#x3D; &quot;bar&quot;;
  console.log(nonEmptyString); &#x2F;&#x2F; “foo”
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="WeakRef"><a href="#WeakRef" class="headerlink" title="WeakRef"></a>WeakRef</h2><p><a href="https://link.juejin.cn/?target=https://tc39.es/ecma262/%23sec-weak-ref.prototype.deref" title="https://tc39.es/ecma262/#sec-weak-ref.prototype.deref">WeakRef</a>用于引用目标对象，而不会将其从垃圾回收器中拿出。<a href="https://link.juejin.cn/?target=https://github.com/tc39/proposal-weakrefs/blob/master/README.md" title="https://github.com/tc39/proposal-weakrefs/blob/master/README.md">一个常见</a>的用例是<code>WeakRef</code>为大对象实现缓存或映射，“不希望大对象仅仅因为它出现在缓存或映射中而保持活动状态。”</p>
 <h2 id="FinalizationRegistry"><a href="#FinalizationRegistry" class="headerlink" title="FinalizationRegistry"></a>FinalizationRegistry</h2><p>该规范提供了消耗许多文件句柄的长时间运行进程的示例。在这种情况下，使用<code>FinalizationRegistry</code>可以确保没有句柄泄漏。</p>
 <p>与 <code>WeakRef</code>一样，<code>FinalizationRegistry</code>更适合平台和框架开发人员的工具箱，而不是应用程序开发人员。</p>
 <h2 id="Numeric-literal-separators-数字分隔符"><a href="#Numeric-literal-separators-数字分隔符" class="headerlink" title="Numeric literal separators 数字分隔符"></a>Numeric literal separators 数字分隔符</h2><pre class="line-numbers language-none"><code class="language-none"> let distanceToSun &#x3D; 91772000000;
  let distanceToSun &#x3D; 91_772_000_000;
-复制代码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>上面两种赋值结果一样，可以让我清楚的查看大数字。</p>
 <h2 id="Array-prototype-sort-improvements"><a href="#Array-prototype-sort-improvements" class="headerlink" title="Array.prototype.sort improvements"></a>Array.prototype.sort improvements</h2><p>这更像是一个注释而不是一个功能。ECMAScript 2021 规范对<code>Array.prototype.sort</code>工作原理的描述更加准确。这种变化应该会减少引擎之间实现起来的差异。</p>
