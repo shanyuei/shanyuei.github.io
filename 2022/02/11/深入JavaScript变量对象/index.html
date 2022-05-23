@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="shanyue"><meta name="copyright" content="shanyue"><meta name="generator" content="Hexo 6.2.0"><meta name="theme" content="hexo-theme-yun"><title>深入JavaScript变量对象 | 山月的小破站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.2.4/dist/yun/yun-markdown.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-theme-vars/base.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/@unocss/runtime/mini.global.js"></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".markdown-body img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link rel="icon" type="image/png" href="/favicon.ico"><link rel="mask-icon" href="/favicon.ico" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    window.Yun = {}
+    window.CONFIG = {"hostname":"example.com","root":"/","title":"山月的小破站","version":"1.9.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}.","hits":"${hits} results found","hits_time":"${hits} results found in ${time} ms"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]},"vendors":{"darken":"https://cdn.jsdelivr.net/npm/darken@1.5.0"}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/hexo-theme-yun.js" type="module"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap"><meta name="description" content="JavaScript 引擎执行一段可执行代码时，会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象(Variable object，VO) 作用域链(Scope chain) this  今天我们来重点讲解变量对象。 变量对象变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。 执行上下文分为两种：全局上下文和函数上下文，接下来我们来分别讲解这两">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入JavaScript变量对象">
+<meta property="og:url" content="http://example.com/2022/02/11/%E6%B7%B1%E5%85%A5JavaScript%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="山月的小破站">
+<meta property="og:description" content="JavaScript 引擎执行一段可执行代码时，会创建对应的执行上下文。 对于每个执行上下文，都有三个重要属性：  变量对象(Variable object，VO) 作用域链(Scope chain) this  今天我们来重点讲解变量对象。 变量对象变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。 执行上下文分为两种：全局上下文和函数上下文，接下来我们来分别讲解这两">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-11T05:30:20.000Z">
+<meta property="article:modified_time" content="2022-05-23T03:14:23.238Z">
+<meta property="article:author" content="shanyue">
+<meta name="twitter:card" content="summary"><script>(function() {
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const setting = localStorage.getItem('darken-mode') || 'auto'
+  if (setting === 'dark' || (prefersDark && setting !== 'light'))
+    document.documentElement.classList.toggle('dark', true)
+})()</script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js" type="module"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js" type="module"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="shanyue"><img width="96" loading="lazy" src="/avatar.jpg" alt="shanyue"></a><div class="site-author-name"><a href="/about/">shanyue</a></div><span class="site-name">山月的小破站</span><sub class="site-subtitle"></sub><div class="site-description"></div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">1</span></a></div><div class="site-state-item"><a href="/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><div class="site-state-item"><a href="/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">0</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1"><span class="toc-number">1.</span> <span class="toc-text">变量对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.</span> <span class="toc-text">全局上下文中变量对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.</span> <span class="toc-text">函数上下文中的变量对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">执行过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A2%84%E7%BC%96%E8%AF%91"><span class="toc-number">3.2.</span> <span class="toc-text">预编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C"><span class="toc-number">3.3.</span> <span class="toc-text">代码执行</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">练习题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article" style="--smc-primary:#0078E7;"><link itemprop="mainEntityOfPage" href="http://example.com/2022/02/11/%E6%B7%B1%E5%85%A5JavaScript%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="shanyue"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="山月的小破站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">深入JavaScript变量对象</h1><div class="post-meta"><div class="post-time"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2022-02-11 13:30:20" itemprop="dateCreated datePublished" datetime="2022-02-11T13:30:20+08:00">2022-02-11</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="Modified: 2022-05-23 11:14:23" itemprop="dateModified" datetime="2022-05-23T11:14:23+08:00">2022-05-23</time></div><div class="post-classify"></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body"><p>JavaScript 引擎执行一段可执行代码时，会创建对应的执行上下文。</p>
+<p>对于每个执行上下文，都有三个重要属性：</p>
+<ul>
+<li>变量对象(Variable object，VO)</li>
+<li>作用域链(Scope chain)</li>
+<li>this</li>
+</ul>
+<p>今天我们来重点讲解变量对象。</p>
+<h1 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h1><p>变量对象是与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明。</p>
+<p>执行上下文分为两种：全局上下文和函数上下文，接下来我们来分别讲解这两种上下文的变量对象。</p>
+<h1 id="全局上下文中变量对象"><a href="#全局上下文中变量对象" class="headerlink" title="全局上下文中变量对象"></a>全局上下文中变量对象</h1><p>全局上下文中的变量对象是全局对象。</p>
+<p>下面我们来了解一下全局对象，在 W3school 中的介绍有：</p>
+<ol>
+<li><p>全局对象是预定义的对象，作为 JavaScript 的全局函数和全局属性的占位符。通过使用全局对象，可以访问所有其他预定义的对象、函数和属性。</p>
+</li>
+<li><p>在顶层 JavaScript 代码中，可以用关键字 this 引用全局对象。全局对象在作用域链最底端，这意味着所有非限定性的变量和函数名都会作为该对象的属性来查询。</p>
+</li>
+<li><p>由于全局对象在作用域链最底端，这也意味着在顶层 JavaScript 代码中声明的变量都将成为全局对象的属性。</p>
+</li>
+</ol>
+<p>字面上大家理解起来可能比较抽象，接下来我们结合具体例子作进一步讲解。</p>
+<ol>
+<li>在顶层 JavaScript 代码中，可以用关键字 this 引用全局对象。在浏览器 JavaScript 中，全局对象是 window。在 node.js 中，全局对象是 global。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">console.log(this); // window</span><br><span class="line">console.log(this === window); // true</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>全局对象是 JavaScript 的全局函数和全局属性的占位符。在顶层 JavaScript 代码中声明的变量都将成为全局对象的属性。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 声明的变量成为了全局对象的属性</span><br><span class="line">var a = 1;</span><br><span class="line">console.log(this.a); // 1</span><br><span class="line"></span><br><span class="line">// 声明的函数成为了全局对象的属性</span><br><span class="line">function b() &#123;&#125;</span><br><span class="line">console.log(this.b); // function b</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>通过使用全局对象，可以访问全局函数和全局属性，也可以访问所有其他预定义的对象、函数和属性。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 使用全局对象访问全局属性 Math，它是一个对象，它拥有 random 方法。</span><br><span class="line">console.log(this.Math.random()); // 打印一个随机数</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>所有非限定性的变量和函数名都会作为该对象的属性来查询。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 这里的 Math 是非限定性的函数名</span><br><span class="line">console.log(Math.random()); // 打印一个随机数</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>全局对象是 Object 构造函数的实例，这也意味着 Object.prototype(原型)上预定义的属性和方法，是可以通过全局对象访问到的。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(this instanceof Object); // true</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>在浏览器 JavaScript 中，全局对象有 window 属性且指向自身。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">console.log(this.window === this); // true</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数上下文中的变量对象"><a href="#函数上下文中的变量对象" class="headerlink" title="函数上下文中的变量对象"></a>函数上下文中的变量对象</h1><p>在函数上下文中，我们用活动对象(activation object, AO)来表示变量对象。</p>
+<p>活动对象和变量对象其实是一个东西，只是变量对象是规范上的或者说是引擎实现上的，不可在 JavaScript 环境中访问，只有到当进入一个执行上下文中，这个执行上下文的变量对象才会被激活，所以才叫 activation object，而只有被激活的变量对象，也就是活动对象，各种属性和方法才能被访问。</p>
+<p>活动对象是在进入函数上下文时被创建的，它有函数的 arguments 属性作为初始化属性。arguments 属性的值就是 Arguments 对象。</p>
+<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>函数上下文的代码执行过程共分成两个阶段，分别是：预编译和执行。</p>
+<h2 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a>预编译</h2><ul>
+<li><p>创建 AO 对象，寻找形参和变量声明</p>
+</li>
+<li><p>把形参和变量名作为 AO 对象的属性名，值为 undefined</p>
+</li>
+<li><p>把实参赋给形参，实参形参相统一</p>
+</li>
+<li><p>寻找函数声明，值为函数体</p>
+</li>
+</ul>
+<p>我们来看个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function foo(a) &#123;</span><br><span class="line">  var b = 2;</span><br><span class="line">  function c() &#123;&#125;</span><br><span class="line">  var d = function() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  b = 3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(1);</span><br></pre></td></tr></table></figure>
+
+<p>这个函数在预编译完成后，AO 会变为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">        0: 1,</span><br><span class="line">        length: 1</span><br><span class="line">    &#125;,</span><br><span class="line">    a: 1,</span><br><span class="line">    b: undefined,</span><br><span class="line">    c: reference to function c()&#123;&#125;,</span><br><span class="line">    d: undefined</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="代码执行"><a href="#代码执行" class="headerlink" title="代码执行"></a>代码执行</h2><p>在代码执行阶段，会顺序执行代码。根据代码，修改变量对象的值。</p>
+<p>上面的例子当代码执行完，AO 会变为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">        0: 1,</span><br><span class="line">        length: 1</span><br><span class="line">    &#125;,</span><br><span class="line">    a: 1,</span><br><span class="line">    b: 3,</span><br><span class="line">    c: reference to function c()&#123;&#125;,</span><br><span class="line">    d: reference to FunctionExpression &quot;d&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h1><ol>
+<li>第一题</li>
+</ol>
+<p>来看下面两端代码，分别会打印什么？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo() &#123;</span><br><span class="line">  console.log(a);</span><br><span class="line">  a = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function bar() &#123;</span><br><span class="line">  a = 1;</span><br><span class="line">  console.log(a);</span><br><span class="line">&#125;</span><br><span class="line">bar();</span><br></pre></td></tr></table></figure>
+
+<p>第一段会报错：Uncaught ReferenceError: a is not defined。</p>
+<p>第二段会打印：1。</p>
+<p>因为第一段代码 a 没有变量声明，所以函数执行上下文的 AO 中没有 a 变量的定义，此时 AO 的值是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">        length: 0</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行打印时，在函数执行上下文的 AO 中没有找到 a 变量的定义，然后就会去全局上下文中找，发现全局也没有，所以就会报未定义的错。</p>
+<p>第二段代码，没有使用 var 关键字声明的变量会成为全局对象的属性，所以执行打印时，会从全局对象找到 a 的值，所以会打印 1。</p>
+<ol start="2">
+<li>第二题</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(foo);</span><br><span class="line"></span><br><span class="line">function foo() &#123;&#125;</span><br><span class="line"></span><br><span class="line">var foo = 1;</span><br></pre></td></tr></table></figure>
+
+<p>会打印 foo 函数，而不是 undefined。</p>
+<p>因为在预编译的第 4 步，会寻找函数声明，值为函数体，也就是函数声明会覆盖变量声明。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此，变量对象的创建过程我们就介绍完了，我们来做个总结：</p>
+<ol>
+<li>全局上下文的变量对象初始化是全局对象</li>
+<li>函数上下文的变量对象初始化只包括 Arguments 对象</li>
+<li>在进入执行上下文时会给变量对象添加形参、变量声明、函数声明等初始的属性值（预编译）</li>
+<li>在代码执行阶段，会修改变量对象的属性值</li>
+</ol>
+</div></section><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="Donate" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>shanyue</li><li class="post-copyright-link"><strong>Post link: </strong><a href="http://example.com/2022/02/11/%E6%B7%B1%E5%85%A5JavaScript%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/" title="深入JavaScript变量对象">http://example.com/2022/02/11/%E6%B7%B1%E5%85%A5JavaScript%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless otherwise stated.</li></ul></article></div><div class="hty-card" id="comment"></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> shanyue</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v6.2.0</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.9.0</span></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["4-4","9-18"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></div></body></html>
